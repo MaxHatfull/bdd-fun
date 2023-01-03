@@ -2,7 +2,7 @@ Feature: Using posts
 
   Scenario: Interacting with posts
     Given I am on the posts page
-    And The list of posts is empty
+    Then The list of posts is empty
 
     When I create a new post
     Then I should see the post details
