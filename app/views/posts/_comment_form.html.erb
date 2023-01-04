@@ -1,5 +1,5 @@
 <div id="new_comment_form">
-  <%= form_with(model: [@post, comment]) do |form| %>
+  <%= form_with(model: [@post, comment], data: {turbo: true}) do |form| %>
     <div>
       <%= form.label :content, style: "display: block" %>
       <%= form.text_area :content %>

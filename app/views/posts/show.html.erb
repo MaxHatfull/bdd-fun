@@ -9,6 +9,8 @@
   <%= button_to "Destroy this post", @post, method: :delete %>
 </div>
 
-<%= render partial: "comment", collection: @post.comments %>
+<div id="comments">
+  <%= render partial: "comment", collection: @post.comments %>
+</div>
 
 <%= render "comment_form", comment: Comment.new(post: @post) %>

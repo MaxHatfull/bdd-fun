@@ -7,6 +7,8 @@ When(/^I create a new post$/) do
   page.fill_in("Name", with: "this is the post title")
   page.fill_in("Content", with: "this is the post content")
   page.click_button("Create Post")
+
+  expect(page).to have_content("this is the post title")
 end
 
 Then(/^I should see the new post$/) do
@@ -48,11 +50,11 @@ end
 
 When(/^I create a comment$/) do
   expect(page).to have_current_path(post_path(Post.last))
-
   within(page.find("div[id='new_comment_form']")) do
     fill_in("Content", with: "interesting comment")
     click_on "Create Comment"
   end
+  expect(page).to have_content("interesting comment")
 end
 
 Then(/^I can see the comment$/) do
@@ -70,4 +72,13 @@ Then(/^I can not see any comments$/) do
   expect(page).to have_current_path(post_path(Post.last))
 
   expect(page).not_to have_css("div[id^='comment_']")
+end
+
+Given(/^js is (.*)$/) do |with_js|
+  case with_js
+  when "true"
+    Capybara.current_driver = :selenium_chrome_headless
+  else
+    Capybara.current_driver = :rack_test
+  end
 end
